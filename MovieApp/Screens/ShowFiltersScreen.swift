@@ -50,13 +50,13 @@ struct ShowFiltersScreen: View {
                     Spacer()
                     Button("Search") {
                         
-                        if let sDate = startDate.asDate(),
-                           let eDate = endDate.asDate() {
-                                movies = filtersVM.filterMoviesByDateRange(startDate: sDate, endDate: eDate)
-                                presentationMode.wrappedValue.dismiss()
-                        }
+                        guard let sDate = startDate.asDate(),
+                              let eDate = endDate.asDate()
+                        else { return }
                         
-                       
+                        movies = filtersVM.filterMoviesByDateRange(startDate: sDate, endDate: eDate)
+                        presentationMode.wrappedValue.dismiss()
+                
                     }.buttonStyle(PlainButtonStyle())
                     Spacer()
                 }
@@ -69,6 +69,13 @@ struct ShowFiltersScreen: View {
                 HStack {
                     Spacer()
                     Button("Search") {
+                        
+                        let sDate = startDate.asDate()
+                        let eDate = endDate.asDate()
+                        let r = Int(minimumRating)
+                        
+                        movies = filtersVM.filterMoviesByDateRangeOrRating(startDate: sDate, endDate: eDate, rating: r)
+                        presentationMode.wrappedValue.dismiss()
                         
                        
                     }.buttonStyle(PlainButtonStyle())
