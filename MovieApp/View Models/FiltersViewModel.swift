@@ -9,6 +9,10 @@ import Foundation
 
 class FiltersViewModel: ObservableObject {
     
+    func filterMoviesByDateRange(startDate: Date, endDate: Date) -> [MovieViewModel] {
+        return Movie.byReleaseDateRange(startDate: startDate, endDate: endDate).map(MovieViewModel.init)
+    }
+    
     func filterMoviesByReleaseDate(releaseDate: Date) -> [MovieViewModel] {
         return Movie.byReleaseDate(releaseDate: releaseDate).map(MovieViewModel.init)
     }

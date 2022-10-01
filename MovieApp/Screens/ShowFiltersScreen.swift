@@ -50,6 +50,12 @@ struct ShowFiltersScreen: View {
                     Spacer()
                     Button("Search") {
                         
+                        if let sDate = startDate.asDate(),
+                           let eDate = endDate.asDate() {
+                                movies = filtersVM.filterMoviesByDateRange(startDate: sDate, endDate: eDate)
+                                presentationMode.wrappedValue.dismiss()
+                        }
+                        
                        
                     }.buttonStyle(PlainButtonStyle())
                     Spacer()
