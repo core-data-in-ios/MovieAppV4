@@ -10,6 +10,17 @@ import CoreData
 
 extension Movie: BaseModel {
     
+    
+    static func byMovieTitle(title: String) -> [Movie] {
+        let request: NSFetchRequest<Movie> = Movie.fetchRequest()
+        request.predicate = NSPredicate(format: "%K BEGINSWITH[cd] %@", #keyPath(Movie.title), title)
+        do {
+            return try viewContext.fetch(request)
+        } catch {
+            return []
+        }
+    }
+    
     static func byReleaseDateRangeOrRating(startDate: Date?, endDate: Date?, rating: Int?) -> [Movie] {
         
         var sDate = Date.distantPast
